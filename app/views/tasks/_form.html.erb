@@ -11,13 +11,13 @@
   <% end %>
   <div class="task_title">
     <%= f.label :name, "タスク名" %>
-    <%= f.text_field :image %>
+    <%= f.text_field :name %>
   </div>
   <div class="task_title">
     <%= f.label :content, "詳細" %>
     <%= f.text_field :content %>
   </div>
-  <% if controller.action_name == "new" %>
+  <% if controller.action_name == "new" || "create" %>
     <%= f.submit %>
   <% end %>
 <% end %>
