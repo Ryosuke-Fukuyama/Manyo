@@ -3,7 +3,7 @@ ToDoリスト
 
 テーブル
 **task**
-| id | name:string | limit:date | priority:integer | progress:string | user_id:bigint |
+| id | name:string | content:text | limit:date | priority:integer | progress:string | user_id:bigint |
 **user**
 | id | name:string | email:string | pass:string | pass_digest:string |
 **tag**
