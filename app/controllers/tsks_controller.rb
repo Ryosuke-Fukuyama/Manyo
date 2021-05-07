@@ -2,13 +2,14 @@ class TsksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.new
+    @tasks = Task.all
   end
 
   def show
   end
 
   def new
+    @task = Task.new
   end
 
   def edit
