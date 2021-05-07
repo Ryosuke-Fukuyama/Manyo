@@ -1,24 +1,28 @@
-# README
+個人向け
+ToDoリスト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+テーブル
+**task**
+` id | name:string | limit:date | priority:integer | progress:string | user_id:bigint `
+**user**
+` id | name:string | email:string | pass:string | pass_digest:string | `
+**tag**
+` id | name:string | task_id:bigint `
+```
 
-Things you may want to cover:
+リスト
+　find_by(progress: )
 
-* Ruby version
+タスク名検索
+?
 
-* System dependencies
+ソート機能
+?
 
-* Configuration
+ラベル機能(アソシエーション？)
 
-* Database creation
+ユーザー登録・ログイン機能
+  本人のタスクのみ表示(セッション)
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
