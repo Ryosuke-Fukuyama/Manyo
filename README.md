@@ -3,12 +3,11 @@ ToDoリスト
 
 テーブル
 **task**
-` id | name:string | limit:date | priority:integer | progress:string | user_id:bigint `
+| id | name:string | limit:date | priority:integer | progress:string | user_id:bigint |
 **user**
-` id | name:string | email:string | pass:string | pass_digest:string | `
+| id | name:string | email:string | pass:string | pass_digest:string |
 **tag**
-` id | name:string | task_id:bigint `
-```
+| id | name:string | task_id:bigint |
 
 リスト
 　find_by(progress: )
