@@ -16,18 +16,24 @@ class TsksController < ApplicationController
   end
 
   def create
-
-    notice: "タスクを作成しました！"
+    if @task.save
+       redirect_to tasks_path, notice: "タスクを作成しました！"
+    else
+      render :new
+    end
   end
 
   def update
-
-    notice: "タスクを更新しました！"
+    if @task.update(task_params)
+       redirect_to tasks_path, notice: "タスクを更新しました！"
+    else
+      render :edit
+    end
   end
 
   def destroy
-
-    flash.now[:alert] = 'タスクを削除しました！'
+    @task.destroy
+    redirect_to tasks_path, notice: "タスクを削除しました！"
   end
 
   private
