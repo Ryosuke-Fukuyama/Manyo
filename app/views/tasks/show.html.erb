@@ -7,9 +7,9 @@
 
 <hr>
 
-<tr>期限<%= @task.limit %></tr>
-<tr>優先順位<%= @task.priority %></tr>
-<tr>ステータス<%= @task.progress %></tr>
-<tr>ラベル<%=# @task.tag.name %></tr>
+# <tr>期限<%#= @task.limit %></tr>
+# <tr>優先順位<%#= @task.priority %></tr>
+# <tr>ステータス<%#= @task.progress %></tr>
+# <tr>ラベル<%#= @task.tag.name %></tr>
 <%= link_to '編集', edit_task_path(@task) %> |
 <%= link_to '一覧', tasks_path %>

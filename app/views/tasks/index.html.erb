@@ -15,9 +15,10 @@
   <% @tasks.each do |task| %>
     <tr>
       <td><%= task.name %></td>
-      <td><%#= task.limit %></td>
-      <td><%#= task.priority %></td>
-      <td><%#= task.progress %></td>
+      # <td><%#= task.limit %></td>
+      # <td><%#= task.priority %></td>
+      # <td><%#= task.progress %></td>
+      # <td><%#= task.tags.name %></td>
       <td><%= link_to '詳細', task_path(task.id) %></td> |
       <td><%= link_to '編集', edit_task_path(task.id) %></td> |
       <td><%= link_to '削除', task_path(task.id),
