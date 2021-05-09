@@ -7,6 +7,7 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+
   errors:
     format: "%{attribute}%{message}"
     attribute:
@@ -22,11 +23,20 @@ ja:
       invalid: は不正な値です
       model_invalid: 'バリデーションに失敗しました: %{errors}'
       not_an_integer: は整数で入力してください
-      # delete_confirm: 削除しますか？
+
+  notice:
+    save: タスクを作成しました！
+    update: タスクを更新しました！
+    destroy: タスクを削除しました！
+
+  confirm:
+    delete: 削除しますか？
+
   helpers:
     submit:
       create: 登録する
       update: 更新する
+
   view:
     name: タスク名
     content: 内容
