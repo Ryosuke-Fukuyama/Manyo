@@ -7,7 +7,7 @@ ToDoリスト
 **user**
 | id | name:string | email:string | pass:string | pass_digest:string |
 **tag**
-| id | name:string | task_id:bigint |
+| id | label:string | task_id:bigint |
 
 リスト
 　find_by(progress: )

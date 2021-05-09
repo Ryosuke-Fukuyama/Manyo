@@ -1,7 +1,7 @@
 <h1><%= t('view.show') %></h1>
 <p id="notice"><%= notice %></p>
 <p>
-  <%= @task.name %>
+  <%= @task.title %>
   ：<%= @task.content %>
 </p>
 
@@ -10,6 +10,6 @@
 # <tr>期限<%#= @task.limit %></tr>
 # <tr>優先順位<%#= @task.priority %></tr>
 # <tr>ステータス<%#= @task.progress %></tr>
-# <tr>ラベル<%#= @task.tag.name %></tr>
+# <tr>ラベル<%#= @task.tag.title %></tr>
 <%= link_to t('view.edit'), edit_task_path(@task) %> |
 <%= link_to t('view.index'), tasks_path %>
