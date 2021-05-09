@@ -1,4 +1,4 @@
-<h1>タスク詳細</h1>
+<h1><%= t('view.show') %></h1>
 <p id="notice"><%= notice %></p>
 <p>
   <%= @task.name %>
@@ -11,5 +11,5 @@
 # <tr>優先順位<%#= @task.priority %></tr>
 # <tr>ステータス<%#= @task.progress %></tr>
 # <tr>ラベル<%#= @task.tag.name %></tr>
-<%= link_to '編集', edit_task_path(@task) %> |
-<%= link_to '一覧', tasks_path %>
+<%= link_to t('view.edit'), edit_task_path(@task) %> |
+<%= link_to t('view.index'), tasks_path %>

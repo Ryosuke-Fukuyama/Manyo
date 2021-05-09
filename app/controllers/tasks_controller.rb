@@ -13,6 +13,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    # ＠progress = ["A", "B", "C"]
   end
 
   def create
