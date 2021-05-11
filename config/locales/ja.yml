@@ -1,0 +1,53 @@
+ja:
+  activerecord:
+    errors:
+      announce: 件のエラー
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+
+  errors:
+    format: "%{attribute}%{message}"
+    attribute:
+      Title: タスク名
+      Content: 内容
+      limit: 期限
+      priority: 優先順位
+      progress: ステータス
+      tag: ラベル
+    messages:
+      blank: を入力してください
+      empty: を入力してください
+      invalid: は不正な値です
+      model_invalid: 'バリデーションに失敗しました: %{errors}'
+      not_an_integer: は整数で入力してください
+
+  notice:
+    save: タスクを作成しました！
+    update: タスクを更新しました！
+    destroy: タスクを削除しました！
+
+  confirm:
+    delete: 削除しますか？
+
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する
+
+  view:
+    title: タスク名
+    content: 内容
+    limit: 期限
+    priority: 優先順位
+    progress: ステータス
+    tag: ラベル
+    show: 詳細
+    index: 一覧
+    edit: 編集
+    destroy: 削除
+    new: 新規投稿
+
+

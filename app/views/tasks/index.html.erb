@@ -1,32 +1,34 @@
-<h1>タスク一覧</h1>
+<h1><%= t('view.index') %></h1>
 <p><%= notice %></p>
 <table>
   <tr>
-    <th>タスク</th>
-    <th>期限</th>
-    <th>優先順位</th>
-    <th>ステータス</th>
-    # <th>タグ</th>
+    <th><%= t('view.title') %></th>
+    <th><%= t('view.limit') %></th>
+    <th><%= t('view.priority') %></th>
+    <th><%= t('view.progress') %></th>
+    # <th><%#= t('view.tag') %></th>
   <tr/>
   # 進捗で絞り込み find_by(progress: )
   # ソート order
-  # 検索 name, content
-  # 検索 tag.name
-  <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.name %></td>
-      # <td><%#= task.limit %></td>
-      # <td><%#= task.priority %></td>
-      # <td><%#= task.progress %></td>
-      # <td><%#= task.tags.name %></td>
-      <td><%= link_to '詳細', task_path(task.id) %></td> |
-      <td><%= link_to '編集', edit_task_path(task.id) %></td> |
-      <td><%= link_to '削除', task_path(task.id),
-                method: :delete,data: { confirm: '削除しますか？' } %>
-      </td>
-    </tr>
+  # 検索 title, content
+  # 検索 tag.title
+  <% @tasks.reverse_each do |task| %>
+    <tbody>
+      <tr>
+        <td><%= task.title %></td>
+        # <td><%#= task.limit %></td>
+        # <td><%#= task.priority %></td>
+        # <td><%#= task.progress %></td>
+        # <td><%#= task.tags.title %></td>
+        <td><%= link_to t('view.show'), task_path(task.id) %></td> |
+        <td><%= link_to t('view.edit'), edit_task_path(task.id) %></td> |
+        <td><%= link_to t('view.destroy'), task_path(task.id),
+                  method: :delete,data: { confirm: t('confirm.delete') } %>
+        </td>
+      </tr>
+    </tbody>
   <% end %>
-  <h6>※ステータス【&nbsp;未着手：A&nbsp;着手：B&nbsp;完了：C&nbsp;】</h6>
+  <h6>※<%= t('view.progress') %>【&nbsp;未着手：A&nbsp;着手：B&nbsp;完了：C&nbsp;】</h6>
 </table>
 <br>
-<%= link_to '新規投稿', new_task_path %>
+<%= link_to t('view.new'), new_task_path %>

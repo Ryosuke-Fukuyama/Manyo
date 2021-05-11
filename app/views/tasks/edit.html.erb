@@ -1,18 +1,18 @@
-<h1>編集</h1>
+<h1><%= t('view.edit') %></h1>
 <%= render 'form' %>
 <%= form_with(model: @task, local: true) do |f| %>
   <div class="task_title">
-    <%= f.label :limit, "期限" %>
+    <%= f.label :limit, t('view.limit') %>
     <%= f.text_field :limit %>
   </div>
   <div class="task_title">
-    <%= f.label :priority, "優先順位" %>
+    <%= f.label :priority, t('view.priority') %>
     <%= f.text_field :priority %>
   </div>
   <div class="task_title">
-    <%= f.label :progress, "ステータス" %>
+    <%= f.label :progress, t('view.progress') %>
     <%= f.text_field :progress %>
   </div>
-  <%= f.submit "更新する" %>
+  <%= f.submit %>
 <% end %>
- <%= link_to "一覧", tasks_path %>
+ <%= link_to t('view.index'), tasks_path %>
