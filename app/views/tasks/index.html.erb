@@ -10,13 +10,14 @@
   <tr/>
   # 進捗で絞り込み find_by(progress: )
   # ソート order
-  # 検索 title, content
+  <%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit") %>
+  # 検索search title, content
   # 検索 tag.title
-  <% @tasks.reverse_each do |task| %>
+  <% @tasks.each do |task| %>
     <tbody>
       <tr>
         <td><%= task.title %></td>
-        # <td><%#= task.limit %></td>
+        <td><%= task.limit %></td>
         # <td><%#= task.priority %></td>
         # <td><%#= task.progress %></td>
         # <td><%#= task.tags.title %></td>

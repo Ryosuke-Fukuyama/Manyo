@@ -19,6 +19,10 @@
     <%= f.label :content, t('view.content') %>
     <%= f.text_field :content %>
   </div>
+  <div class="task_title">
+    <%= f.label :limit, t('view.limit') %>
+    <%= f.date_field :limit %>
+  </div>
   <% if controller.action_name == "new" || "create" %>
     <%= f.submit %>
     <%= link_to t('view.index'), tasks_path %>

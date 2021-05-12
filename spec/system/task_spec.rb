@@ -11,11 +11,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         #    各入力欄(label)に該当する内容をfill_in（入力）する処理を書く
         fill_in 'タスク名',    with: "test_title"
         fill_in '内容', with: "test_content"
+        fill_in '期限', with: '002021-05-01'
+
         # 3. ボタンをクリックする
         click_button "登録する"
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         expect(page).to have_content 'test_title'
         expect(page).to have_content 'test_content'
+        # binding.irb
+        expect(page).to have_content '2021-05-01'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
@@ -34,10 +38,13 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '一覧表示機能' do
     let!(:task2) { FactoryBot.create(:second_task) }
+    let!(:task3) { FactoryBot.create(:third_task) }
     before do
       # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
-      visit tasks_path
+      visit tasks_path(sort_limit: true)
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
+      # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
+      @list_top = first('tbody td')
     end
     context '一覧画面に遷移した場合' do
       subject { page }
@@ -46,20 +53,23 @@ RSpec.describe 'タスク管理機能', type: :system do
           # テストで使用するためのタスクを作成
           # タスク一覧ページに遷移
           # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
+binding.irb
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         is_expected.to have_content 'Factoryで作ったデフォルトのタイトル１'
         is_expected.to have_content 'Factoryで作ったデフォルトのタイトル２'
       end
     end
     context '複数のタスクを作成した場合' do
-      before do
-        # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
-        # save_and_open_page
-        @list_top = first('tbody td')
-      end
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル２' }
+      it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル3' }
+    end
+    context '終了期限でソートするというリンクを押した場合' do
+      before do
+        click_link '期限でソートする'
+      end
+      subject { @list_top }
+      it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル2' }
     end
   end
 end
