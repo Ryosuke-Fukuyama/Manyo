@@ -45,7 +45,6 @@ RSpec.describe 'タスク管理機能', type: :system do
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
       @list_top = first('tbody tr')
-# binding.irb
     end
     context '一覧画面に遷移した場合' do
       subject { page }
@@ -55,14 +54,14 @@ RSpec.describe 'タスク管理機能', type: :system do
           # タスク一覧ページに遷移
           # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
-        is_expected.to have_content 'Factoryで作ったデフォルトのタイトル１'
-        is_expected.to have_content 'Factoryで作ったデフォルトのタイトル２'
+        is_expected.to have_content Task.find(11)
+        is_expected.to have_content Task.find(22)
       end
     end
     context '複数のタスクを作成した場合' do
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content '3' }
+      it { is_expected.to have_content Task.find(33) }
     end
     context '終了期限でソートするというリンクを押した場合' do
       before do
@@ -70,7 +69,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # save_and_open_page
       end
       subject { @list_top }
-      it { is_expected.to have_content '2' }
+      it { is_expected.to have_content Task.find(22) }
     end
   end
 end
