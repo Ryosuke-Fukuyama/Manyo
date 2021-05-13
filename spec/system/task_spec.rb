@@ -44,7 +44,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit tasks_path
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
-      @list_top = first('tbody tr')
+      @list_top = first('.sort')
     end
     context '一覧画面に遷移した場合' do
       subject { page }
@@ -66,7 +66,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '終了期限でソートするというリンクを押した場合' do
       before do
         click_link '期限でソートする'
-        # save_and_open_page
       end
       subject { @list_top }
       it { is_expected.to have_content Task.find(22)[:title] }
