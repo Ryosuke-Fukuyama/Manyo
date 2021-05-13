@@ -18,7 +18,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         expect(page).to have_content 'test_title'
         expect(page).to have_content 'test_content'
-        # binding.irb
         expect(page).to have_content '2021-05-01'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
@@ -41,7 +40,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     let!(:task3) { FactoryBot.create(:third_task) }
     before do
       # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
-      visit tasks_path(sort_limit: true)
+      visit tasks_path
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
       @list_top = first('tbody td')
@@ -53,7 +52,6 @@ RSpec.describe 'タスク管理機能', type: :system do
           # テストで使用するためのタスクを作成
           # タスク一覧ページに遷移
           # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
-binding.irb
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         is_expected.to have_content 'Factoryで作ったデフォルトのタイトル１'
         is_expected.to have_content 'Factoryで作ったデフォルトのタイトル２'
@@ -65,11 +63,12 @@ binding.irb
       it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル3' }
     end
     context '終了期限でソートするというリンクを押した場合' do
-      before do
-        click_link '期限でソートする'
+      example "終了期限の降順に並び替える" do
+        click_link "期限でソートする"
+        @list_top = first('tbody td')
+binding.irb
+        expect(@list_top).to have_content 'Factoryで作ったデフォルトのタイトル2'
       end
-      subject { @list_top }
-      it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル2' }
     end
   end
 end

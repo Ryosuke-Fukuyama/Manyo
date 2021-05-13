@@ -4,8 +4,8 @@
   <tr>
     <th><%= t('view.title') %></th>
     <th><%= t('view.limit') %></th>
-    <th><%= t('view.priority') %></th>
     <th><%= t('view.progress') %></th>
+    <th><%= t('view.priority') %></th>
     # <th><%#= t('view.tag') %></th>
   <tr/>
   # 進捗で絞り込み find_by(progress: )
@@ -18,8 +18,8 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.limit %></td>
+        <td><%= task.progress %></td>
         # <td><%#= task.priority %></td>
-        # <td><%#= task.progress %></td>
         # <td><%#= task.tags.title %></td>
         <td><%= link_to t('view.show'), task_path(task.id) %></td> |
         <td><%= link_to t('view.edit'), edit_task_path(task.id) %></td> |
@@ -29,7 +29,6 @@
       </tr>
     </tbody>
   <% end %>
-  <h6>※<%= t('view.progress') %>【&nbsp;未着手：A&nbsp;着手：B&nbsp;完了：C&nbsp;】</h6>
 </table>
 <br>
 <%= link_to t('view.new'), new_task_path %>

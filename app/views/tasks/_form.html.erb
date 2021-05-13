@@ -23,8 +23,16 @@
     <%= f.label :limit, t('view.limit') %>
     <%= f.date_field :limit %>
   </div>
-  <% if controller.action_name == "new" || "create" %>
-    <%= f.submit %>
-    <%= link_to t('view.index'), tasks_path %>
+  <% if controller.action_name == "edit" || "update" %>
+    <div class="task_title">
+    <%= f.label :progress, t('view.progress') %>
+    <%= f.select :progress, [["未着手", "未着手"], ["着手中", "着手中"],
+                          ["完了", "完了"]], include_blank: "選択して下さい" %>
+    </div>
+    <div class="task_title">
+      <%= f.label :priority, t('view.priority') %>
+      <%= f.number_field :priority %>
   <% end %>
+  </div><%= f.submit %>
+  <%= link_to t('view.index'), tasks_path %>
 <% end %>

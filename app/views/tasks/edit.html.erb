@@ -1,16 +1,2 @@
 <h1><%= t('view.edit') %></h1>
 <%= render 'form' %>
-<%= form_with(model: @task, local: true) do |f| %>
-  <div class="task_title">
-    <%= f.label :priority, t('view.priority') %>
-    <%= f.number_field :priority %>
-  </div>
-  <div class="task_title">
-    <%= f.label :progress, t('view.progress') %>
-    <%#= f.razio :progress %>A
-    <%#= f.razio :progress %>B
-    <%#= f.razio :progress %>C
-  </div>
-  <%= f.submit %>
-<% end %>
- <%= link_to t('view.index'), tasks_path %>

@@ -2,9 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order('id DESC')
     if params[:sort_params] == "limit" #|| params[:option] == nil
       @tasks = Task.all.order('"limit" DESC')
+    else
+      @tasks = Task.all.order('id DESC')
     end
   end
 
