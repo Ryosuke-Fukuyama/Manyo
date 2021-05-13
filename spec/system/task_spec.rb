@@ -31,7 +31,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # let化したので不要
         # task = FactoryBot.create(:task, title: 'task')
         visit task_path(task.id)
-        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(page).to have_content Task.find(11)[:title]
       end
     end
   end
@@ -54,14 +54,14 @@ RSpec.describe 'タスク管理機能', type: :system do
           # タスク一覧ページに遷移
           # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
-        is_expected.to have_content Task.find(11)
-        is_expected.to have_content Task.find(22)
+        is_expected.to have_content Task.find(11)[:title]
+        is_expected.to have_content Task.find(22)[:title]
       end
     end
     context '複数のタスクを作成した場合' do
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content 33 }
+      it { is_expected.to have_content Task.find(33)[:title] }
     end
     context '終了期限でソートするというリンクを押した場合' do
       before do
@@ -69,7 +69,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # save_and_open_page
       end
       subject { @list_top }
-      it { is_expected.to have_content 22 }
+      it { is_expected.to have_content Task.find(22)[:title] }
     end
   end
 end
