@@ -61,7 +61,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '複数のタスクを作成した場合' do
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content Task.find(33) }
+      it { is_expected.to have_content 33 }
     end
     context '終了期限でソートするというリンクを押した場合' do
       before do
@@ -69,7 +69,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # save_and_open_page
       end
       subject { @list_top }
-      it { is_expected.to have_content Task.find(22) }
+      it { is_expected.to have_content 22 }
     end
   end
 end
