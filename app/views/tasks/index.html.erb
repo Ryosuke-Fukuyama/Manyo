@@ -8,11 +8,14 @@
     <th><%= t('view.priority') %></th>
     # <th><%#= t('view.tag') %></th>
   <tr/>
+  <h4>検索</h4>
+  <%= form_with(model: @task, url: tasks_path, method: :get, local:true) do |f| %>
+    <%= f.text_field :title, placeholder: "あいまい検索" %>
+    <%= f.submit '検索' %>
+  <% end %>
   # 進捗で絞り込み find_by(progress: )
-  # ソート order
+  <h4>ソート</h4>
   <%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit") %>
-  # 検索search title, content
-  # 検索 tag.title
   <% @tasks.each do |task| %>
     <tbody>
       <tr>

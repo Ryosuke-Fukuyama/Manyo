@@ -2,10 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:sort_params] == "limit" #|| params[:option] == nil
-      @tasks = Task.all.order('"limit" DESC')
-    else
-      @tasks = Task.all.order('id DESC')
+    @tasks = Task.all.order(id: :DESC)
+    if params[:title].present? && params[:title] != ""
+      @tasks = Task.title_search(params[:title])
+    elsif params[:sort_params] == "limit" #|| params[:option] == nil
+      @tasks = Task.all.order(limit: :DESC)
     end
   end
 
@@ -17,7 +18,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    # ＠progress = ["A", "B", "C"]
   end
 
   def create
@@ -48,6 +48,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :limit)
+    params.require(:task).permit(:title, :content, :limit, :progress)
   end
 end

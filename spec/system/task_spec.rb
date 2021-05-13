@@ -18,6 +18,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         expect(page).to have_content 'test_title'
         expect(page).to have_content 'test_content'
+        # binding.irb
         expect(page).to have_content '2021-05-01'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
@@ -43,7 +44,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit tasks_path
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
-      @list_top = first('tbody td')
+      @list_top = first('tbody tr')
+# binding.irb
     end
     context '一覧画面に遷移した場合' do
       subject { page }
@@ -60,15 +62,15 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '複数のタスクを作成した場合' do
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content 'Factoryで作ったデフォルトのタイトル3' }
+      it { is_expected.to have_content '3' }
     end
     context '終了期限でソートするというリンクを押した場合' do
-      example "終了期限の降順に並び替える" do
-        click_link "期限でソートする"
-        @list_top = first('tbody td')
-binding.irb
-        expect(@list_top).to have_content 'Factoryで作ったデフォルトのタイトル2'
+      before do
+        click_link '期限でソートする'
+        # save_and_open_page
       end
+      subject { @list_top }
+      it { is_expected.to have_content '2' }
     end
   end
 end
