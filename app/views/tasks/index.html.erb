@@ -1,5 +1,13 @@
 <h1><%= t('view.index') %></h1>
 <p><%= notice %></p>
+<h4>検索</h4>
+<%= form_with(model: @task, url: tasks_path, method: :get, local:true) do |f| %>
+  <%= f.text_field :title, placeholder: "あいまい検索" %>
+  <%= f.submit t('view.search') %>
+<% end %>
+# 進捗で絞り込み find_by(progress: )
+<h4>ソート</h4>
+<%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit") %>
 <table>
   <tr>
     <th><%= t('view.title') %></th>
@@ -8,19 +16,11 @@
     <th><%= t('view.priority') %></th>
     # <th><%#= t('view.tag') %></th>
   <tr/>
-  <h4>検索</h4>
-  <%= form_with(model: @task, url: tasks_path, method: :get, local:true) do |f| %>
-    <%= f.text_field :title, placeholder: "あいまい検索" %>
-    <%= f.submit t('view.search') %>
-  <% end %>
-  # 進捗で絞り込み find_by(progress: )
-  <h4>ソート</h4>
-  <%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit") %>
   <% @tasks.each do |task| %>
-    <tr class = 'sort'>
-      <td><%= task.title %></td>
-      <td><%= task.limit %></td>
-      <td><%= task.progress %></td>
+    <tr>
+      <td class = 'sort_limit'><%= task.title %></td>
+      <td class = 'sort_limit'><%= task.limit %></td>
+      <td class = 'sort_limit'><%= task.progress %></td>
       # <td><%#= task.priority %></td>
       # <td><%#= task.tags.title %></td>
       <td><%= link_to t('view.show'), task_path(task.id) %></td> |
