@@ -1,13 +1,13 @@
 <h1><%= t('view.index') %></h1>
 <p><%= notice %></p>
-<h4>検索</h4>
-<%= form_with(model: @task, url: tasks_path, method: :get, local:true) do |f| %>
-  <%= f.text_field :title, placeholder: "あいまい検索" %>
+<%= form_with(scope: :search, url: tasks_path, method: :get, local:true) do |f| %>
+  <%= f.text_field :title, value: @search_params[:title], placeholder: "あいまい検索" %>
+  <%= f.select :progress, [[t('view.A'), "未着手"], [t('view.B'), "着手中"], [t('view.C'), "完了"]],
+        seleced: @search_params[:progress], include_blank: t('view.select') %>
   <%= f.submit t('view.search') %>
 <% end %>
-# 進捗で絞り込み find_by(progress: )
-<h4>ソート</h4>
-<%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit") %>
+<%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit", progress: params[:progress]) %>
+<hr>
 <table>
   <tr>
     <th><%= t('view.title') %></th>

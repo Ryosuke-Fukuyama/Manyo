@@ -26,8 +26,8 @@
   <% if controller.action_name == "edit" || "update" %>
     <div class="task_title">
     <%= f.label :progress, t('view.progress') %>
-    <%= f.select :progress, [["未着手", "未着手"], ["着手中", "着手中"],
-                          ["完了", "完了"]], include_blank: "選択して下さい" %>
+    <%= f.select :progress, [[t('view.A'), "未着手"], [t('view.B'), "着手中"],
+                          [t('view.C'), "完了"]], include_blank: t('view.select') %>
     </div>
     <div class="task_title">
       <%= f.label :priority, t('view.priority') %>

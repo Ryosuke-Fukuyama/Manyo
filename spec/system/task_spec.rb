@@ -64,6 +64,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '終了期限でソートするというリンクを押した場合' do
       before do
         click_link '期限でソートする'
+        @list_top = first('.sort_limit')
       end
       subject { @list_top }
       it { is_expected.to have_content @task2[:title] }
