@@ -1,6 +1,6 @@
 <h1><%= t('view.index') %></h1>
 <p><%= notice %></p>
-<%= form_with(scope: :search, url: tasks_path, method: :get, local:true) do |f| %>
+<%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <%= f.label :title, t('view.title') %>
   <%= f.text_field :title, value: @search_params[:title], placeholder: "あいまい検索" %>
   <%= f.label :progress, t('view.progress') %>
@@ -8,7 +8,7 @@
         seleced: @search_params[:progress], include_blank: t('view.select') %>
   <%= f.submit t('view.search') %>
 <% end %>
-<%= link_to t('view.sort_limit') , tasks_path(sort_params: "limit", progress: params[:progress]) %>
+<%= link_to t('view.sort_limit'), tasks_path(sort_params: "limit") %> # , @search_params[:page]
 <hr>
 <table>
   <tr>
