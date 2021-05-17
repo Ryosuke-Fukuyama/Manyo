@@ -1,6 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
+    @task =  FactoryBot.create(:task_task)
     @task1 = FactoryBot.create(:task)
   end
   describe '新規作成機能' do
@@ -13,13 +14,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'タスク名',    with: "test_title"
         fill_in '内容', with: "test_content"
         fill_in '期限', with: '002021-05-01'
-
+        fill_in 'ステータス', with: "完了"
         # 3. ボタンをクリックする
         click_button "登録する"
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         expect(page).to have_content 'test_title'
         expect(page).to have_content 'test_content'
         expect(page).to have_content '2021-05-01'
+        expect(page).to have_content '完了'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
@@ -68,6 +70,34 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
       subject { @list_top }
       it { is_expected.to have_content @task2[:title] }
+    end
+  end
+  describe '検索' do
+    before do
+      visit tasks_path
+    end
+    context 'タイトルで検索した場合' do
+      example '絞り込みできる' do
+        fill_in 'タイトル検索', with: 'でふぉると'
+        click_button '検索する'
+        expect(page).to have_content 'でふぉると'
+      end
+    end
+    context 'ステータスで検索した場合' do
+      example '絞り込みできる' do
+        select '着手中', from: 'ステータス'
+        click_button '検索する'
+        expect(page).to have_content '着手中'
+      end
+    end
+    context 'タイトルとステータスの両方で検索した場合' do
+      example '絞り込みできる' do
+        fill_in 'タイトル検索', with: 'デフォルト'
+        select '着手中', from: 'ステータス'
+        click_button '検索する'
+        expect(page).to have_content 'デフォルト'
+        expect(page).to have_content '着手中'
+      end
     end
   end
 end

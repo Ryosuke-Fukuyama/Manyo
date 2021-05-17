@@ -58,7 +58,9 @@ ja:
     new: 新規投稿
     sort_limit: 期限でソートする
     search: 検索する
-    select: 選択
+    title_search: タスク名検索
+    progress_search: ステータス検索
+    select: 選択する
     A: 未着手
     B: 着手中
     C: 完了
