@@ -56,7 +56,8 @@ ja:
     edit: 編集
     destroy: 削除
     new: 新規投稿
-    sort_limit: 期限でソートする
+    sort_limit: 期限でソート
+    sort_priority: 優先順位でソート
     search: 検索する
     title_search: タスク名検索
     progress_search: ステータス検索

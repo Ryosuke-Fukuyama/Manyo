@@ -9,7 +9,7 @@
 
 期限：<%= @task.limit %><br>
 ステータス：<%= @task.progress %><br>
-優先順位：<%#= @task.priority %><br>
+優先順位：<%= @task.priority %><br>
 ラベル：<%#= @task.tag.title %><br>
 <br>
 <%= link_to t('view.edit'), edit_task_path(@task) %> |

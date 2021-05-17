@@ -24,24 +24,24 @@ RSpec.describe Task, type: :model do
   describe 'scopeのテスト' do
     let!(:task) { FactoryBot.create(:task) }
     let!(:second_task) { FactoryBot.create(:second_task) }
-    let!(:second_task) { FactoryBot.create(:third_task) }
-    xcontext 'scopeメソッドでタイトルのあいまい検索が' do
+    let!(:third_task) { FactoryBot.create(:third_task) }
+    let!(:task_task) { FactoryBot.create(:task_task) }
+    context 'scopeメソッドでタイトルのあいまい検索が' do
       example 'できる' do
-
+        @search_params = { title: 'でふぉると' }
+        expect(Task.search(@search_params)).to include task_task
       end
     end
     context 'scopeメソッドでステータス検索が' do
       example 'できる' do
-        within find_field('ステータス') do
-          all('option').each do |option|
-            expect(option['selected']).to be_blank
-          end
-        end
+        @search_params = { progress: '完了' }
+        expect(Task.search(@search_params)).to include third_task
       end
     end
-    xcontext 'scopeメソッドで複合条件検索が' do
+    context 'scopeメソッドで複合条件検索が' do
       example 'できる' do
-
+        @search_params = { title: 'デフォルト', progress: '未着手' }
+        expect(Task.search(@search_params)).to include task
       end
     end
   end

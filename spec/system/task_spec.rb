@@ -3,6 +3,10 @@ RSpec.describe 'タスク管理機能', type: :system do
   before do
     @task =  FactoryBot.create(:task_task)
     @task1 = FactoryBot.create(:task)
+    @task2 = FactoryBot.create(:second_task)
+    @task3 = FactoryBot.create(:third_task)
+    visit tasks_path
+    @list_top = first('.sort')
   end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -14,7 +18,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'タスク名',    with: "test_title"
         fill_in '内容', with: "test_content"
         fill_in '期限', with: '002021-05-01'
-        fill_in 'ステータス', with: "完了"
+        select '完了', from: 'ステータス'
         # 3. ボタンをクリックする
         click_button "登録する"
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
@@ -38,13 +42,9 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '一覧表示機能' do
     before do
-      @task2 = FactoryBot.create(:second_task)
-      @task3 = FactoryBot.create(:third_task)
       # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
-      visit tasks_path
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
-      @list_top = first('.sort_limit')
     end
     context '一覧画面に遷移した場合' do
       subject { page }
@@ -61,26 +61,24 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '複数のタスクを作成した場合' do
       subject { @list_top }
       # 'タスクが作成日時の降順に並んでいる'
-      it { is_expected.to have_content @task3[:title] }
+      it { is_expected.to have_content @task[:title] }
     end
     context '終了期限でソートするというリンクを押した場合' do
       before do
         click_link '期限でソートする'
-        @list_top = first('.sort_limit')
+        @list_top = first('.sort')
       end
       subject { @list_top }
       it { is_expected.to have_content @task2[:title] }
     end
   end
+
   describe '検索' do
-    before do
-      visit tasks_path
-    end
     context 'タイトルで検索した場合' do
       example '絞り込みできる' do
-        fill_in 'タイトル検索', with: 'でふぉると'
+        fill_in 'タスク名', with: 'でふぉると'
         click_button '検索する'
-        expect(page).to have_content 'でふぉると'
+        expect(page).to have_content @task[:title]
       end
     end
     context 'ステータスで検索した場合' do
@@ -92,11 +90,10 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルとステータスの両方で検索した場合' do
       example '絞り込みできる' do
-        fill_in 'タイトル検索', with: 'デフォルト'
-        select '着手中', from: 'ステータス'
+        fill_in 'タスク名', with: 'デフォルト'
+        select '完了', from: 'ステータス'
         click_button '検索する'
-        expect(page).to have_content 'デフォルト'
-        expect(page).to have_content '着手中'
+        expect(page).to have_content @task3[:title]
       end
     end
   end

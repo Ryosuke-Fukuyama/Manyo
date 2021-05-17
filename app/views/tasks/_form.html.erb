@@ -30,7 +30,7 @@
   </div>
   <div class="task_title">
     <%= f.label :priority, t('view.priority') %>
-    <%= f.number_field :priority %>
+    <%= f.number_field :priority, in: 0..3 %>
   </div><%= f.submit %>
   <%= link_to t('view.index'), tasks_path %>
 <% end %>
