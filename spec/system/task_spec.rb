@@ -63,13 +63,22 @@ RSpec.describe 'タスク管理機能', type: :system do
       # 'タスクが作成日時の降順に並んでいる'
       it { is_expected.to have_content @task[:title] }
     end
-    context '終了期限でソートするというリンクを押した場合' do
+    context '終了期限でソートというリンクを押した場合' do
       before do
-        click_link '期限でソートする'
+        click_link '期限でソート'
         @list_top = first('.sort')
       end
       subject { @list_top }
       it { is_expected.to have_content @task2[:title] }
+    end
+    context '優先順位でソートというリンクを押した場合' do
+      before do
+        click_link '優先順位でソート'
+        @list_top = first('.sort')
+      end
+      subject { @list_top }
+      sleep 0.5
+      it { is_expected.to have_content @task3[:title] }
     end
   end
 

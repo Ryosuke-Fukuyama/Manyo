@@ -4,13 +4,13 @@ class TasksController < ApplicationController
   def index
     @search_params = task_search_params
     if params[:sort_params] == "limit"
-       @tasks = Task.all.limit_sort
+       @tasks = Task.all.limit_sort.page(params[:page]).per(8)
     elsif params[:sort_params] == "priority"
-       @tasks = Task.all.priority_sort
+       @tasks = Task.all.priority_sort.page(params[:page]).per(8)
     elsif
-      @tasks = Task.search(@search_params)
+      @tasks = Task.search(@search_params).page(params[:page]).per(8)
     elsif
-      @tasks = Task.all.id_sort
+      @tasks = Task.all.id_sort.page(params[:page]).per(8)
     end
   end
 

@@ -7,6 +7,7 @@ FactoryBot.define do
     content { 'Factoryで作ったデフォルトのコンテント１' }
     limit { '2021-06-02' }
     progress { '未着手' }
+    priority { 2 }
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
@@ -15,16 +16,19 @@ FactoryBot.define do
     content { 'Factoryで作ったデフォルトのコンテント２' }
     limit { '2021-06-03' }
     progress { '着手中' }
+    priority { 1 }
   end
   factory :third_task, class: Task do
     title { 'Factoryで作ったデフォルトのタイトル3' }
     content { 'Factoryで作ったデフォルトのコンテント3' }
     limit { '2021-06-01' }
     progress { '完了' }
+    priority { 3 }
   end
   factory :task_task, class: Task do
     title { 'でふぉるとのたいとる' }
     content { 'でふぉるとのこんてんと' }
     limit { '2021-05-01' }
+    priority { 2 }
   end
 end
