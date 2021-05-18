@@ -10,10 +10,6 @@
   </div>
 <% end %>
 <%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :image %>
-  <%= image_tag @user.image.url if @user.image && @user.image.url %>
-  <%= f.file_field :image %>
-  <%= f.hidden_field :image_cache %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :email %>
