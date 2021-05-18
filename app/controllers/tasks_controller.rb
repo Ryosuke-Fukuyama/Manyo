@@ -4,13 +4,13 @@ class TasksController < ApplicationController
   def index
     @search_params = task_search_params
     if params[:sort_params] == "limit"
-       @tasks = Task.all.limit_sort.page(params[:page]).per(8)
+       @tasks = current_user.tasks.all.limit_sort.page(params[:page]).per(8)
     elsif params[:sort_params] == "priority"
-       @tasks = Task.all.priority_sort.page(params[:page]).per(8)
+       @tasks = current_user.tasks.all.priority_sort.page(params[:page]).per(8)
     elsif
-      @tasks = Task.search(@search_params).page(params[:page]).per(8)
+      @tasks = current_user.tasks.search(@search_params).page(params[:page]).per(8)
     elsif
-      @tasks = Task.all.id_sort.page(params[:page]).per(8)
+      @tasks = current_user.tasks.all.id_sort.page(params[:page]).per(8)
     end
   end
 
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
        redirect_to task_path(@task.id), notice: t('notice.save')
     else

@@ -10,10 +10,24 @@
   </head>
 
   <body>
-  <header>
-      <ul>
-        <li><a href="#">万葉課題</a></li>
-      </ul>
+    <header>
+      <nav>
+        <ul class="top_menu clearfix">
+          <li><a>万葉課題</a></li>
+          <% if logged_in? %>
+            <li class="top_left"><%= link_to "投稿一覧", tasks_path %></li>
+            <li class="top_right"><%= link_to "プロフィール", user_path(current_user.id) %></li>
+            <li class="top_right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+          <% else %>
+            <li><%= link_to "アカウント作成", new_user_path %></li>
+            <li><%= link_to "ログイン", new_session_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
     <%= yield %>
     <footer>
       <p>運営会社DIVE INTO CODE株式会社</p>
