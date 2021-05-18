@@ -2,7 +2,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @search_params = task_search_params
+    if params[:sort_params] == "limit"
+       @tasks = Task.all.limit_sort.page(params[:page]).per(8)
+    elsif params[:sort_params] == "priority"
+       @tasks = Task.all.priority_sort.page(params[:page]).per(8)
+    elsif
+      @tasks = Task.search(@search_params).page(params[:page]).per(8)
+    elsif
+      @tasks = Task.all.id_sort.page(params[:page]).per(8)
+    end
   end
 
   def show
@@ -13,7 +22,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    # ＠progress = ["A", "B", "C"]
   end
 
   def create
@@ -44,6 +52,10 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :limit, :progress, :priority)
+  end
+
+  def task_search_params
+    params.fetch(:search, {}).permit(:title, :progress)
   end
 end

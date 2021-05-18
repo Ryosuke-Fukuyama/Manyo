@@ -1,3 +1,78 @@
 // Place all the styles related to the tsks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  text-align: center;
+}
+li{
+    list-style:none;
+}
+ul{
+    padding:0;
+}
+.title{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+}
+.menu li {
+    background-color:#012F4B;
+    color:#fff;
+    padding:5% 10%;
+    text-align:center;
+}
+.contents li{
+    background-color:#F3A7AB;
+    color:#fff;
+    padding:10% 10%;
+    box-sizing: border-box;
+    border: solid 1px #fff;
+}
+.topic li{
+    margin:1%;
+    border-bottom: dotted 1px #333333;
+}
+.container{
+    margin-top:20px;
+    padding-bottom: 100px;
+}
+header {
+  width: 100%;
+  background-color: #04c585;
+  height: 54px;
+  margin: 0
+}
+header ul {
+  margin: 0 auto;
+  list-style: none;
+}
+header ul a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+}
+header li {
+  float: left;
+  width: auto;
+}
+header ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+footer {
+  width: 100%;
+  background-color:#04c585;
+  padding: 20px 0 10px 0;
+  color: white;
+  margin: auto;
+  padding-bottom: 10px;
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+}
