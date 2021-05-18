@@ -85,14 +85,14 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '検索' do
     context 'タイトルで検索した場合' do
       example '絞り込みできる' do
-        fill_in 'タスク名', with: 'でふぉると'
+        fill_in :search_title, with: 'たいとる'
         click_button '検索する'
-        expect(page).to have_content @task[:title]
+        expect(page).to have_content 'たいとる'
       end
     end
     context 'ステータスで検索した場合' do
       example '絞り込みできる' do
-        select '着手中', from: 'ステータス'
+        select '着手中', from: :search_progress
         click_button '検索する'
         expect(page).to have_content '着手中'
       end
