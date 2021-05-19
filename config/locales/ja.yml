@@ -51,6 +51,7 @@ ja:
     priority: 優先順位
     progress: ステータス
     tag: ラベル
+    user_name: ユーザー名
     show: 詳細
     index: 一覧
     edit: 編集

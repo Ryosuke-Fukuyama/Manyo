@@ -2,15 +2,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
+    i = 8
     @search_params = task_search_params
     if params[:sort_params] == "limit"
-       @tasks = current_user.tasks.all.limit_sort.page(params[:page]).per(8)
+       @tasks = current_user.tasks.all.limit_sort.page(params[:page]).per(i)
     elsif params[:sort_params] == "priority"
-       @tasks = current_user.tasks.all.priority_sort.page(params[:page]).per(8)
+       @tasks = current_user.tasks.all.priority_sort.page(params[:page]).per(i)
     elsif
-      @tasks = current_user.tasks.search(@search_params).page(params[:page]).per(8)
+      @tasks = current_user.tasks.search(@search_params).page(params[:page]).per(i)
     elsif
-      @tasks = current_user.tasks.all.id_sort.page(params[:page]).per(8)
+      @tasks = current_user.tasks.all.id_sort.page(params[:page]).per(i)
     end
   end
 

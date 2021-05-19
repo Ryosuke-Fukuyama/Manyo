@@ -1,0 +1,17 @@
+<h1>Admin edit</h1>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+# <p><%#= ＠user.name %>のロール</p>
+<%= form_with(model: @user, local: true) do |f| %>
+  <%= f.label :admin, "管理者" %>
+  <%= f.check_box :admin, {}, "true", "false" %>
+  <%= f.submit "ロール編集完了" %>
+<% end %>

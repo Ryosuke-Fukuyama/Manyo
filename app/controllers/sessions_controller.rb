@@ -10,14 +10,12 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id  #インスタンス化した時のid
       redirect_to user_path(user.id)
     else
-      flash.now[:danger] = 'ログインに失敗しました'
-      render :new
+      render :new, notice: 'ログインに失敗しました'
     end
   end
 
   def destroy
     session.delete(:user_id)
-    flash[:notice] = 'ログアウトしました'
-    redirect_to new_session_path
+    redirect_to new_session_path, notice: 'ログアウトしました'
   end
 end

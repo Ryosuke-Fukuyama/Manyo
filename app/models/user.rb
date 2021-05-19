@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :tasks
+  before_destroy :admin_limit
+  has_many :tasks, dependent: :destroy
 
   has_secure_password
 
@@ -10,4 +11,11 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   before_validation { email.downcase! }
+
+  def admin_limit
+    admin = User.all.find_by(admin: true)
+    if admin.count == 1
+      redirect_to admin_users_path, notice:"ユーザーを削除できませんでした！！"
+    end
+  end
 end

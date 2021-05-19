@@ -13,10 +13,10 @@
     <header>
       <nav>
         <ul class="top_menu clearfix">
-          <li><a>万葉課題</a></li>
+        <li class="top_left"><%= link_to "万葉課題", admin_users_path %></li>
           <% if logged_in? %>
-            <li class="top_left"><%= link_to "投稿一覧", tasks_path %></li>
-            <li class="top_right"><%= link_to "プロフィール", user_path(current_user.id) %></li>
+            <li class="top_left"><%= link_to "タスク一覧", tasks_path %></li>
+            <li class="top_right"><%= link_to "マイページ", user_path(current_user.id) %></li>
             <li class="top_right"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
           <% else %>
             <li><%= link_to "アカウント作成", new_user_path %></li>
