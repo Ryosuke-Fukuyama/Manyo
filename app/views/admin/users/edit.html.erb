@@ -9,8 +9,8 @@
     </ul>
   </div>
 <% end %>
-# <p><%#= ＠user.name %>のロール</p>
-<%= form_with(model: @user, local: true) do |f| %>
+# <p><%= @user.name %>のロール</p>
+<%= form_with(model: @user, url: admin_user_path, method: :patch, local: true) do |f| %>
   <%= f.label :admin, "管理者" %>
   <%= f.check_box :admin, {}, "true", "false" %>
   <%= f.submit "ロール編集完了" %>

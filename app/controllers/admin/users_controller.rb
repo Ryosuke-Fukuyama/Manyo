@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.all.page(params[:page]).per(8)
+# binding.irb
   end
 
   def new
@@ -22,8 +23,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice:"ユーザーを削除しました！"
+    if @user.destroy
+      redirect_to admin_users_path, notice:"ユーザーを削除しました！"
+    else
+      redirect_to admin_users_path, notice:"ユーザーを削除できませんでした！！"
+    end
   end
 
   def show
@@ -35,11 +39,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_path, notice: "ロールを更新しました！"
-    else
-      render :edit
-    end
+    @user.update(user_params)
+    redirect_to admin_users_path, notice: "ロールを更新しました！"
   end
 
   private
@@ -52,7 +53,7 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation,
-                                 :image, :image_cache)
+                                 :admin)
   end
 
   def set_user

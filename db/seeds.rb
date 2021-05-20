@@ -25,8 +25,8 @@ User.eager_load(:tasks).all.each do |user|
   3.times do |n|
     Task.create!(title: "テスト#{n + 1}",
                  content: "テストコンテント#{n + 1}",
-                 # limit: "",
-                 # progress: "",
+                 # limit: .sample,
+                 # progress: ["未着手", "着手中", "完了"].sample,
                  # priority: "",
                  user_id: user.id
                 )
