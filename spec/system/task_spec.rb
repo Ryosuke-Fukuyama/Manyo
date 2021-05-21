@@ -15,10 +15,10 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         # 2. 新規登録内容を入力する
         #    各入力欄(label)に該当する内容をfill_in（入力）する処理を書く
-        fill_in 'タスク名',    with: "test_title"
-        fill_in '内容', with: "test_content"
-        fill_in '期限', with: '002021-05-01'
-        select '完了', from: 'ステータス'
+        fill_in :task_title,    with: "test_title"
+        fill_in :task_content, with: "test_content"
+        fill_in :task_limit, with: "002021-05-01"
+        select '完了', from: :task_progress
         # 3. ボタンをクリックする
         click_button "登録する"
         # 4. clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
@@ -41,11 +41,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '一覧表示機能' do
-    before do
       # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
       # 変数をセットする場合は、ローカル変数ではなく、インスタンス変数にデータをセットしています。※ before ブロックと it ブロックの中では変数のスコープが異なるため。
       # allメソッドを使うことで、条件に合致した要素の配列を取得できます。
-    end
     context '一覧画面に遷移した場合' do
       subject { page }
       example '作成済みのタスク一覧が表示される' do
@@ -99,8 +97,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルとステータスの両方で検索した場合' do
       example '絞り込みできる' do
-        fill_in 'タスク名', with: 'デフォルト'
-        select '完了', from: 'ステータス'
+        fill_in :search_title, with: 'デフォルト'
+        select '完了', from: :search_progress
         click_button '検索する'
         expect(page).to have_content @task3[:title]
       end

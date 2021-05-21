@@ -12,11 +12,16 @@ class User < ApplicationRecord
 
   before_validation { email.downcase! }
 
+  scope :created_at_sort, -> { order(created_at: :ASC) }
+
   private
 
   def admin_limit
     user = User.find(id)
     admin_users = User.where(admin: true)
-    throw(:abort) unless ( admin_users.size > 1 || user[:id] != current_user[:id] ) && user[:admin] != true
+    if user[:admin] != true
+    elsif admin_users.size == 1  || user[:id] == current_user[:id]
+      throw(:abort)
+    end
   end
 end

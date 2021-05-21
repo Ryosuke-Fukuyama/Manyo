@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     elsif
       @tasks = current_user.tasks.search(@search_params).page(params[:page]).per(i)
     elsif
-      @tasks = current_user.tasks.all.id_sort.page(params[:page]).per(i)
+      @tasks = current_user.tasks.all.created_at_sort.page(params[:page]).per(i)
     end
   end
 

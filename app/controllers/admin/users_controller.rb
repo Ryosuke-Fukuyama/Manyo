@@ -4,19 +4,17 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page]).per(8)
-# binding.irb
+    @users = User.all.created_at_sort.page(params[:page]).per(8)
   end
 
   def new
-    @admin_user = User.new
+    @user = User.new
   end
 
   def create
-    @admin_user = User.new(user_params)
+    @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to user_path(@user.id), notice:"管理者を作成しました！"
+       redirect_to admin_user_path(@user.id), notice:"他ユーザーを作成しました！"
     else
       render :new
     end
@@ -24,14 +22,13 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     if @user.destroy
-      redirect_to admin_users_path, notice:"ユーザーを削除しました！"
+      redirect_to admin_users_path, notice:"他ユーザーを削除しました！"
     else
       redirect_to admin_users_path, notice:"ユーザーを削除できませんでした！！"
     end
   end
 
   def show
-
   end
 
   def edit
@@ -46,8 +43,8 @@ class Admin::UsersController < ApplicationController
   private
 
   def admin_required
-    if  current_user[:admin] != true
-      redirect_to tasks_path, notice:"管理者以外はアクセスできません！" unless admin_user
+    unless current_user.admin?
+      redirect_to tasks_path, notice:"管理者以外はアクセスできません！"
     end
   end
 

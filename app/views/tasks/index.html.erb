@@ -1,5 +1,4 @@
 <h1><%= t('view.index') %></h1>
-<p><%= notice %></p>
 <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
   <%= f.label :title, t('view.title') %>
   <%= f.text_field :title, value: @search_params[:title], placeholder: "あいまい検索" %>
@@ -22,14 +21,14 @@
   <tr/>
   <% @tasks.each do |task| %>
     <tr>
-      <td class = 'sort'>&nbsp;<%= task.title %></td>
-      <td class = 'sort'>&nbsp;<%= task.limit %></td>
-      <td class = 'sort'>&nbsp;<%= task.progress %></td>
-      <td class = 'sort'>&nbsp;<%= task.priority %></td>
-      # <td class = 'sort'>&nbsp;<%#= task.tags.title %></td>
-      <td class = 'sort'>&nbsp;<%= task.user.name %></td>
-      <td><%= link_to t('view.show'), task_path(task.id) %></td> |
-      <td><%= link_to t('view.edit'), edit_task_path(task.id) %></td> |
+      <td class = 'sort'><%= task.title %></td>
+      <td class = 'sort'><%= task.limit %></td>
+      <td class = 'sort'><%= task.progress %></td>
+      <td class = 'sort'><%= task.priority %></td>
+      # <td class = 'sort'><%#= task.tags.title %></td>
+      <td class = 'sort'><%= task.user.name %></td>
+      <td><%= link_to t('view.show'), task_path(task.id) %>/</td>
+      <td><%= link_to t('view.edit'), edit_task_path(task.id) %>/</td>
       <td><%= link_to t('view.destroy'), task_path(task.id),
                 method: :delete,data: { confirm: t('confirm.delete') } %>
       </td>

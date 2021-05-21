@@ -11,6 +11,12 @@ User.create!(name: "admin_user",
              admin: true
             )
 
+User.create!(name: "test_user",
+             email: "test_user@fmail.com",
+             password: "password",
+             admin: false
+            )
+
 10.times do |n|
   name = Faker::Games::LeagueOfLegends.champion
   email = Faker::Internet.email
