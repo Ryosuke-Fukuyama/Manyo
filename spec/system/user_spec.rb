@@ -33,7 +33,12 @@ RSpec.describe 'ログイン機能', type: :system do
       fill_in :session_password, with: "password"
       click_button "ログイン"
     end
-    context 'ログインした時' do
+    context 'ログイン' do
+      example 'できる' do
+        expect(page).to have_content "ログインしました"
+      end
+    end
+    context 'ログインすると' do
       example 'そのユーザーページに転移' do
         expect(page).to have_content "user-①のページ"
       end
