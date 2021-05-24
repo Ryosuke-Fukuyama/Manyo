@@ -1,0 +1,22 @@
+<h1><%= @user.name %>のページ</h1>
+
+<p><%= link_to 'プロフィール編集', edit_user_path(@user) %></p>
+<hr>
+
+<table>
+  <tr>
+    <th>&nbsp;タスク数</th>
+  </tr>
+    <td><%= @user.tasks.count %></td>
+</table>
+<br>
+<table>
+  <tr>
+    <th>&nbsp;<%= t('view.title') %></th>
+  </tr>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td class = 'sort'><%= task.title %></td>
+    </tr>
+  <% end %>
+</table>

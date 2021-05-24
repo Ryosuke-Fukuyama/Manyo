@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+  belongs_to :user
+
+
   validates :title, presence: true, length: { maximum: 30 }
   validates :content, presence: true
 
@@ -16,7 +19,7 @@ class Task < ApplicationRecord
   scope :progress_is, -> (progress) { where(progress: progress) if progress.present? }
   scope :limit_sort, -> { order(limit: :DESC) }
   scope :priority_sort, -> { order(priority: :DESC) }
-  scope :id_sort, -> { order(id: :DESC) }
+  scope :created_at_sort, -> { order(created_at: :DESC) }
 
   # enum  :{ 優先順位: 0, 高: 3, 中: 2, 低: 1 }
 end
