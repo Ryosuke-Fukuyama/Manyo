@@ -16,7 +16,7 @@ ja:
       limit: 期限
       priority: 優先順位
       progress: ステータス
-      tag: ラベル
+      label: ラベル
     messages:
       blank: を入力してください
       empty: を入力してください

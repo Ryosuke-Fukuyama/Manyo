@@ -31,6 +31,11 @@
   <div class="task_title">
     <%= f.label :priority, t('view.priority') %>
     <%= f.number_field :priority, in: 0..3 %>
-  </div><%= f.submit %>
+  </div>
+  <div class="task_title">
+    <%= f.label :label, t('view.label') %>
+    <%= f.collection_check_boxes :label_ids, Label.all, :id, :name, include_hidden: false %>
+  </div>
+  <%= f.submit %>
   <%= link_to t('view.index'), tasks_path %>
 <% end %>

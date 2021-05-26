@@ -5,6 +5,8 @@
   <%= f.label :progress, t('view.progress') %>
   <%= f.select :progress, [[t('view.A'), "未着手"], [t('view.B'), "着手中"], [t('view.C'), "完了"]],
         seleced: @search_params[:progress], include_blank: t('view.select') %>
+  <%= f.label :label, t('view.label') %>
+  <%= f.select :label_id, Label.pluck(:name, :id), selected: @search_params[:label_id], include_blank: t('view.select') %>
   <%= f.submit t('view.search') %>
 <% end %>
 <%= link_to t('view.sort_limit'), tasks_path(sort_params: "limit") %> |
@@ -16,7 +18,7 @@
     <th>&nbsp;<%= t('view.limit') %></th>
     <th>&nbsp;<%= t('view.progress') %></th>
     <th>&nbsp;<%= t('view.priority') %></th>
-     <th>&nbsp;<%#= t('view.tag') %></th>
+     <th>&nbsp;<%= t('view.label') %></th>
     <th>&nbsp;<%= t('view.user_name') %></th>
   <tr/>
   <% @tasks.each do |task| %>
@@ -25,7 +27,11 @@
       <td class = 'sort'><%= task.limit %></td>
       <td class = 'sort'><%= task.progress %></td>
       <td class = 'sort'><%= task.priority %></td>
-      # <td class = 'sort'><%#= task.tags.title %></td>
+      <td class = 'sort'>
+        <% task.labels.each do |label| %>
+          <%= label.name %>
+        <% end %>
+      </td>
       <td class = 'sort'><%= task.user.name %></td>
       <td><%= link_to t('view.show'), task_path(task.id) %>/</td>
       <td><%= link_to t('view.edit'), edit_task_path(task.id) %>/</td>

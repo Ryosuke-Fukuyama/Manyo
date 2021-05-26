@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :labels
   root "tasks#index"
 
   resources :sessions, only: [:new, :create, :destroy]

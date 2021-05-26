@@ -8,6 +8,8 @@ class TasksController < ApplicationController
        @tasks = current_user.tasks.all.limit_sort.page(params[:page]).per(i)
     elsif params[:sort_params] == "priority"
        @tasks = current_user.tasks.all.priority_sort.page(params[:page]).per(i)
+    elsif params[:label_id] != ""
+      @tasks = current_user.tasks.joins(:labels).distinct.search(@search_params).page(params[:page]).per(i)
     elsif
       @tasks = current_user.tasks.search(@search_params).page(params[:page]).per(i)
     elsif
@@ -53,10 +55,10 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :progress, :priority)
+    params.require(:task).permit(:title, :content, :limit, :progress, :priority, { label_ids: [] })
   end
 
   def task_search_params
-    params.fetch(:search, {}).permit(:title, :progress)
+    params.fetch(:search, {}).permit(:title, :progress, :label_id)
   end
 end

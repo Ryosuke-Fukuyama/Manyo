@@ -38,3 +38,7 @@ User.eager_load(:tasks).all.each do |user|
                 )
   end
 end
+
+6.times do |n|
+  Label.create!(id: "#{n + 1}", name: "テストラベル#{n + 1}",)
+end
