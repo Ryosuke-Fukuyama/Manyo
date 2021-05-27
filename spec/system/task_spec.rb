@@ -36,7 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '任意のタスク詳細画面に遷移した場合' do
       example '該当タスクの内容が表示される' do
         visit task_path(@task1.id)
-        expect(page).to have_content @task1[:title]
+        expect(page).to have_content "Factoryで作ったデフォルトのタイトル１"
       end
     end
   end
@@ -45,13 +45,13 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       subject { page }
       example '作成済みのタスク一覧が表示される' do
-        is_expected.to have_content @task2[:title]
-        is_expected.to have_content @task3[:title]
+        is_expected.to have_content "Factoryで作ったデフォルトのタイトル２"
+        is_expected.to have_content "Factoryで作ったデフォルトのタイトル3"
       end
     end
     context '複数のタスクを作成した場合' do
       subject { @list_top }
-      it { is_expected.to have_content @task[:title] }
+      it { is_expected.to have_content "Factoryで作ったデフォルトのタイトル3" }
     end
     context '優先順位でソートというリンクを押した場合' do
       before do
@@ -60,32 +60,52 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
       subject { @list_top }
       sleep 0.5
-      it { is_expected.to have_content @task3[:title] }
+      it { is_expected.to have_content "でふぉるとのたいとる" }
     end
   end
 
   describe '検索' do
     context 'タイトルで検索した場合' do
       example '絞り込みできる' do
-        fill_in :search_title, with: 'たいとる'
+        fill_in :task_title, with: 'たいとる'
         click_button '検索する'
         expect(page).to have_content 'たいとる'
       end
     end
     context 'ステータスで検索した場合' do
       example '絞り込みできる' do
-        select '着手中', from: :search_progress
+        select '着手中', from: :task_progress
         click_button '検索する'
         expect(page).to have_content '着手中'
       end
     end
     context 'タイトルとステータスの両方で検索した場合' do
       example '絞り込みできる' do
-        fill_in :search_title, with: 'デフォルト'
-        select '完了', from: :search_progress
+        fill_in :task_title, with: 'デフォルト'
+        select '完了', from: :task_progress
         click_button '検索する'
-        expect(page).to have_content @task3[:title]
+        expect(page).to have_content "Factoryで作ったデフォルトのタイトル3"
       end
     end
   end
+
+  describe 'エラーページ' do
+    context 'NotFoundの場合' do
+      example '404が表示される' do
+        visit '/tasks/404test'
+        expect(page).to have_content 'お探しのページは見つかりません。'
+        # expect(page.status_code).to eq 404
+      end
+    end
+    context 'パーミッションエラーの場合' do
+      example '500が表示される' do
+        # 一覧画面に遷移したら例外を発生させる
+        allow_any_instance_of(TasksController).to receive(:index).and_throw(Exception)
+        visit tasks_path
+        expect(page).to have_content 'Internal Server Error'
+        # expect(page.status_code).to eq 500
+      end
+    end
+  end
+
 end

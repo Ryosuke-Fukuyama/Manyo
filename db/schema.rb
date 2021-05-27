@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_000659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "limit", default: -> { "now()" }, null: false
-    t.string "progress", default: "f", null: false
+    t.integer "progress", default: 0, null: false
     t.integer "priority", default: 0, null: false
     t.bigint "user_id"
     t.index ["title"], name: "index_tasks_on_title"

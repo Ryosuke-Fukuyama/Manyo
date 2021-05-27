@@ -17,7 +17,7 @@ User.create!(name: "test_user",
              admin: false
             )
 
-10.times do |n|
+8.times do |n|
   name = Faker::Games::LeagueOfLegends.champion
   email = Faker::Internet.email
   password = "password"
@@ -28,7 +28,7 @@ User.create!(name: "test_user",
 end
 
 User.eager_load(:tasks).all.each do |user|
-  3.times do |n|
+  10.times do |n|
     Task.create!(title: "テスト#{n + 1}",
                  content: "テストコンテント#{n + 1}",
                  # limit: .sample,
@@ -39,6 +39,6 @@ User.eager_load(:tasks).all.each do |user|
   end
 end
 
-6.times do |n|
+10.times do |n|
   Label.create!(id: "#{n + 1}", name: "テストラベル#{n + 1}",)
 end

@@ -25,12 +25,11 @@
   </div>
   <div class="task_title">
     <%= f.label :progress, t('view.progress') %>
-    <%= f.select :progress, [[t('view.A'), "未着手"], [t('view.B'), "着手中"],
-                          [t('view.C'), "完了"]], include_blank: t('view.select') %>
+    <%= f.select :progress, Task.progresses.keys %>
   </div>
   <div class="task_title">
     <%= f.label :priority, t('view.priority') %>
-    <%= f.number_field :priority, in: 0..3 %>
+    <%= f.select :priority, Task.priorities.keys %>
   </div>
   <div class="task_title">
     <%= f.label :label, t('view.label') %>

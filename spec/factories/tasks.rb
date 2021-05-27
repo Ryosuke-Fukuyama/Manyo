@@ -7,8 +7,12 @@ FactoryBot.define do
     content { 'Factoryで作ったデフォルトのコンテント１' }
     limit { '2021-06-02' }
     progress { '未着手' }
-    priority { 2 }
+    priority { 1 }
     association :user, factory: :user
+    # after(:build) do |task|
+    #   label = create(:label)
+    #   task.labellings << build(:labelling, task: task, label: label)
+    # end
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
@@ -17,7 +21,7 @@ FactoryBot.define do
     content { 'Factoryで作ったデフォルトのコンテント２' }
     limit { '2021-06-03' }
     progress { '着手中' }
-    priority { 1 }
+    priority { 0 }
     # association :user, factory: :user
   end
   factory :third_task, class: Task do
@@ -25,7 +29,7 @@ FactoryBot.define do
     content { 'Factoryで作ったデフォルトのコンテント3' }
     limit { '2021-06-01' }
     progress { '完了' }
-    priority { 3 }
+    priority { 0 }
     # association :user, factory: :user
   end
   factory :task_task, class: Task do
